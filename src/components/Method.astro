@@ -1,0 +1,43 @@
+---
+import Section from "./ui/Section.astro";
+import Icon from "./ui/Icon.astro";
+import { steps, patti } from "../data/process";
+---
+
+<Section
+  id="metodo"
+  divider
+  eyebrow="Come lavoriamo"
+  title="Tre passi, nessuna sorpresa."
+>
+  <ol class="grid gap-5 md:grid-cols-3">
+    {
+      steps.map((s, i) => (
+        <li
+          class="reveal rounded-2xl border border-line bg-surface p-7"
+          style={`--d:${0.05 + i * 0.11}s`}
+        >
+          <span
+            class="grid h-9 w-9 place-items-center rounded-full bg-ambra font-display text-base font-bold text-ambra-ink"
+            aria-hidden="true"
+          >
+            {i + 1}
+          </span>
+          <h3 class="mt-4 font-display text-xl font-semibold">{s.title}</h3>
+          <p class="mt-2 text-fumo">{s.description}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <ul class="reveal mt-10 flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium text-fumo" style="--d:.2s">
+    {
+      patti.map((p) => (
+        <li class="inline-flex items-center gap-2">
+          <Icon name="check" class="h-4 w-4 text-ambra" />
+          {p}
+        </li>
+      ))
+    }
+  </ul>
+</Section>

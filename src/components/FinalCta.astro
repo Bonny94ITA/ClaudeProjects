@@ -1,0 +1,67 @@
+---
+import Button from "./ui/Button.astro";
+import Icon from "./ui/Icon.astro";
+import { site, whatsappUrl } from "../config/site";
+---
+
+<section id="contatti" class="scroll-mt-20 px-5 pb-20 pt-8 sm:pb-28">
+  <div class="cta-panel reveal relative mx-auto max-w-6xl overflow-hidden rounded-[28px] bg-notte px-6 py-14 text-center text-notte-text sm:px-12 sm:py-20">
+    <!-- Il cartellino APERTO: stesso dell'hero, la porta si chiude come si apre -->
+    <div class="cta-sign relative mb-8 inline-block" aria-hidden="true">
+      <span class="inline-block rounded-[7px] bg-ambra px-3 py-1.5 text-xs font-bold tracking-[0.16em] text-ambra-ink shadow-[0_6px_18px_-4px_rgba(232,163,60,0.6)]">
+        APERTO
+      </span>
+    </div>
+
+    <h2 class="relative text-3xl font-semibold tracking-tight text-notte-text sm:text-5xl">
+      La porta è aperta.
+    </h2>
+    <p class="relative mx-auto mt-5 max-w-xl text-lg text-notte-muted">
+      Raccontaci il tuo lavoro: ti diciamo cosa faremmo noi, gratis e senza
+      impegno. E se non possiamo aiutarti, te lo diciamo e basta.
+    </p>
+
+    <div class="relative mt-9 flex flex-wrap justify-center gap-3">
+      <Button href={whatsappUrl} variant="ambra" size="lg" target="_blank" rel="noopener noreferrer">
+        <Icon name="whatsapp" class="h-4.5 w-4.5" />
+        Scrivici su WhatsApp
+      </Button>
+      <Button
+        href={`mailto:${site.email}`}
+        variant="ghost"
+        size="lg"
+        class="!border-notte-text/25 !text-notte-text hover:!border-notte-text/50 hover:!bg-notte-text/5"
+      >
+        {site.email}
+      </Button>
+    </div>
+
+    <p class="relative mt-7 text-sm text-notte-muted">
+      Rispondiamo in giornata, dal lunedì al venerdì.
+    </p>
+  </div>
+</section>
+
+<style>
+  /* Il bagliore dell'insegna sul pannello notte */
+  .cta-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(60% 55% at 50% 0%, rgba(232, 163, 60, 0.22), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-sign {
+    transform-origin: 50% -14px;
+    animation: swing 5.5s ease-in-out infinite;
+  }
+  .cta-sign::before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    width: 1.5px;
+    height: 18px;
+    background: var(--color-notte-muted);
+  }
+</style>

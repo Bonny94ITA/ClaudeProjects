@@ -6,20 +6,25 @@ import { services } from "../data/services";
 
 <Section
   id="servizi"
-  tone="muted"
   eyebrow="Cosa facciamo"
-  title="Tutto quello che serve per farti trovare e scegliere"
-  subtitle="Servizi pensati per le piccole attività locali: concreti, su misura e senza tecnicismi."
+  title="Quattro cose. Fatte bene."
+  subtitle="Niente pacchetti gonfiati: solo quello che serve a una piccola attività per lavorare meglio."
 >
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid gap-5 sm:grid-cols-2">
     {
-      services.map((service) => (
-        <article class="reveal group rounded-2xl border border-ink-100 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">
-          <div class="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-500 group-hover:text-ink-950">
+      services.map((service, i) => (
+        <article
+          class="reveal rounded-2xl border border-line bg-surface p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+          style={`--d:${0.05 + i * 0.09}s`}
+        >
+          <div class="grid h-12 w-12 place-items-center rounded-xl bg-blu/12 text-blu">
             <Icon name={service.icon} class="h-6 w-6" />
           </div>
-          <h3 class="text-lg font-bold">{service.title}</h3>
-          <p class="mt-2 text-ink-500">{service.description}</p>
+          <h3 class="mt-5 font-display text-xl font-semibold">{service.title}</h3>
+          <p class="mt-2 text-fumo">{service.description}</p>
+          <span class="mt-5 inline-block rounded-full bg-blu/10 px-3 py-1 text-xs font-semibold tracking-wide text-blu">
+            {service.tag}
+          </span>
         </article>
       ))
     }

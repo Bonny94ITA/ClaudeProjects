@@ -8,8 +8,8 @@ interface Props {
   eyebrow?: string;
   title?: string;
   subtitle?: string;
-  /** Sfondo alternato per ritmo visivo. */
-  tone?: "white" | "muted" | "dark";
+  /** Riga di separazione in alto (per il ritmo della one-page). */
+  divider?: boolean;
   class?: string;
 }
 
@@ -18,36 +18,30 @@ const {
   eyebrow,
   title,
   subtitle,
-  tone = "white",
+  divider = false,
   class: className = "",
 } = Astro.props;
-
-const tones = {
-  white: "bg-white text-ink-800",
-  muted: "bg-ink-50 text-ink-800",
-  dark: "bg-ink-950 text-ink-100",
-};
-
-const titleColor = tone === "dark" ? "text-white" : "text-ink-950";
-const subColor = tone === "dark" ? "text-ink-300" : "text-ink-500";
 ---
 
-<section id={id} class={`scroll-mt-20 ${tones[tone]} ${className}`}>
-  <div class="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+<section
+  id={id}
+  class={`scroll-mt-20 ${divider ? "border-t border-line" : ""} ${className}`}
+>
+  <div class="mx-auto max-w-6xl px-5 py-20 sm:py-28">
     {
       (eyebrow || title || subtitle) && (
-        <div class="reveal mx-auto mb-12 max-w-2xl text-center">
-          {eyebrow && (
-            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-brand-600">
-              {eyebrow}
-            </p>
-          )}
+        <div class="mb-12 max-w-2xl">
+          {eyebrow && <p class="eyebrow reveal">{eyebrow}</p>}
           {title && (
-            <h2 class={`text-3xl font-extrabold sm:text-4xl ${titleColor}`}>
+            <h2 class="reveal mt-4 text-3xl font-semibold sm:text-4xl" style="--d:.08s">
               {title}
             </h2>
           )}
-          {subtitle && <p class={`mt-4 text-lg ${subColor}`}>{subtitle}</p>}
+          {subtitle && (
+            <p class="reveal mt-4 text-lg text-fumo" style="--d:.14s">
+              {subtitle}
+            </p>
+          )}
         </div>
       )
     }

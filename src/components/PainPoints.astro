@@ -1,0 +1,40 @@
+---
+import Section from "./ui/Section.astro";
+
+const quotes = [
+  "«Il sito? L'ha fatto mio nipote nel 2016.»",
+  "«Su Google ci sono ancora gli orari vecchi.»",
+  "«I clienti mi trovano solo col passaparola.»",
+];
+---
+
+<Section
+  divider
+  eyebrow="Ti suona familiare?"
+  title="Frasi che sentiamo tutte le settimane."
+>
+  <ul class="grid gap-4">
+    {
+      quotes.map((q, i) => (
+        <li
+          class="reveal font-display text-xl font-medium tracking-tight text-fumo sm:text-2xl lg:text-3xl"
+          style={`--d:${0.1 + i * 0.12}s`}
+        >
+          {q}
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="reveal mt-12 max-w-2xl" style="--d:.15s">
+    <h3 class="font-display text-2xl font-semibold text-blu sm:text-3xl">
+      Non è colpa tua.
+    </h3>
+    <p class="mt-4 text-lg text-fumo">
+      Nessuno ha il tempo di diventare esperto di internet mentre manda avanti
+      una bottega. Per questo ci siamo noi: sistemiamo le tre cose che contano
+      davvero — <strong class="font-semibold text-ink">farti trovare, farti capire, farti contattare</strong> —
+      e lasciamo perdere tutto il resto.
+    </p>
+  </div>
+</Section>

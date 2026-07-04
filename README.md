@@ -1,9 +1,9 @@
 # Bottega Web — sito vetrina per attività locali
 
-Sito vetrina (one-page) per proporre servizi web a piccole attività locali —
-panetterie, bar, ristoranti, negozi di quartiere. **100% statico**, veloce e
-pronto per essere hostato gratuitamente. Nessun backend: il modulo di contatto
-usa [Web3Forms](https://web3forms.com) (piano gratuito).
+Sito one-page in stile Apple per proporre servizi web a piccole attività —
+artigiani, negozi, professionisti. **100% statico**, veloce e pronto per
+essere hostato gratuitamente. Nessun backend: i contatti arrivano via
+WhatsApp ed email.
 
 Costruito con **[Astro](https://astro.build)** + **Tailwind CSS v4**.
 
@@ -19,41 +19,42 @@ npm run preview    # anteprima della build di produzione
 npm run check      # type-check (Astro + TypeScript)
 ```
 
-## 🎨 Personalizzazione (parti da qui)
+## 🎨 Design — "La bottega, ma digitale"
+
+- **Palette**: bianco calce `#f6f4f0`, blu inchiostro `#161c28`,
+  **blu tuta da lavoro** `#2c5b84`, **ambra insegna** `#e8a33c`.
+- **Font**: Bricolage Grotesque (titoli) + Instrument Sans (testo),
+  self-hosted via `@fontsource` per privacy/GDPR e performance.
+- **Tema scuro automatico** (`prefers-color-scheme`): la bottega di sera,
+  con la luce della vetrina accesa.
+- **Elemento firma**: la "vetrina digitale" nell'hero — un browser con tenda
+  da negozio e cartellino APERTO; al passaggio del mouse si accende la luce.
+- Micro-animazioni con rispetto di `prefers-reduced-motion`.
+
+## ✏️ Personalizzazione (parti da qui)
 
 Tutto il branding è centralizzato — non serve toccare i componenti:
 
 | Cosa | Dove |
 |---|---|
-| Nome, contatti, WhatsApp, social, chiave form | `src/config/site.ts` |
+| Nome, contatti, WhatsApp, social | `src/config/site.ts` |
 | Colori e font del brand | `src/styles/global.css` (blocco `@theme`) |
 | Servizi offerti | `src/data/services.ts` |
-| Esempi/portfolio | `src/data/portfolio.ts` |
-| Pacchetti e prezzi | `src/data/pricing.ts` |
-| Metodo di lavoro | `src/data/process.ts` |
-| FAQ | `src/data/faq.ts` |
-
-## 📨 Attivare il modulo di contatto
-
-1. Vai su [web3forms.com](https://web3forms.com), inserisci la tua email e
-   ottieni una **Access Key** gratuita (nessun account richiesto).
-2. Incolla la chiave in `src/config/site.ts` → campo `web3formsKey`.
-3. Da quel momento i messaggi del form arrivano nella tua casella email.
-
-Finché la chiave è il placeholder, il form mostra un avviso "modalità demo" e
-non invia (così non si rompe nulla in sviluppo).
+| Metodo di lavoro e patti | `src/data/process.ts` |
+| Testimonianze | `src/data/testimonials.ts` |
 
 ## 🏗️ Architettura
 
 ```
 src/
-├─ config/site.ts      → single source of truth (brand, contatti, form)
+├─ config/site.ts      → single source of truth (brand, contatti)
 ├─ data/*.ts           → contenuti tipizzati, separati dalla presentazione
-├─ styles/global.css   → design system (token colori/font)
+├─ styles/global.css   → design system (token colori/font, tema scuro)
 ├─ scripts/reveal.ts   → animazioni "reveal" allo scroll (no dipendenze)
 ├─ components/
-│  ├─ ui/              → primitive riusabili (Section, Button, Icon)
-│  └─ *.astro          → sezioni della pagina (Hero, Services, …)
+│  ├─ ui/              → primitive riusabili (Section, Button, Icon, BrandMark)
+│  └─ *.astro          → sezioni della one-page (Hero, PainPoints, Services,
+│                        Method, Testimonials, FinalCta)
 ├─ layouts/Base.astro  → <head> SEO/OpenGraph + JSON-LD, header/footer
 └─ pages/              → index, privacy, 404
 ```
@@ -94,6 +95,6 @@ certo è il **dominio (~8–15 €/anno)**.
 
 ## 📄 Note
 
-- Testi e prezzi sono **placeholder professionali** in italiano: personalizzali.
+- Testi e testimonianze sono **placeholder professionali** in italiano: personalizzali.
 - La pagina `/privacy` è un modello base: adattala ai dati reali prima di pubblicare.
 - Font self-hosted (`@fontsource`) per privacy/GDPR e performance.

@@ -1,0 +1,37 @@
+---
+import Section from "./ui/Section.astro";
+import { testimonials } from "../data/testimonials";
+---
+
+<Section
+  id="storie"
+  eyebrow="Parola di chi c'è passato"
+  title="Piccole attività, come la tua."
+>
+  <div class="grid gap-5 md:grid-cols-3">
+    {
+      testimonials.map((t, i) => (
+        <figure
+          class="reveal flex flex-col gap-5 rounded-2xl border border-line bg-surface p-7 shadow-sm"
+          style={`--d:${0.05 + i * 0.11}s`}
+        >
+          <blockquote class="font-display text-lg font-medium leading-snug tracking-tight">
+            «{t.quote}»
+          </blockquote>
+          <figcaption class="mt-auto flex items-center gap-3">
+            <span
+              class="grid h-10 w-10 place-items-center rounded-full bg-blu/14 font-display text-sm font-semibold text-blu"
+              aria-hidden="true"
+            >
+              {t.name[0]}
+            </span>
+            <span class="text-sm">
+              <span class="block font-semibold">{t.name}</span>
+              <span class="text-fumo">{t.job}</span>
+            </span>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</Section>

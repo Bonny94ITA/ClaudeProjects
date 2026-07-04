@@ -1,12 +1,13 @@
 ---
 import Button from "./ui/Button.astro";
+import Icon from "./ui/Icon.astro";
+import BrandMark from "./ui/BrandMark.astro";
 import { site } from "../config/site";
 
 const links = [
   { href: "/#servizi", label: "Servizi" },
-  { href: "/#esempi", label: "Esempi" },
-  { href: "/#prezzi", label: "Prezzi" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/#metodo", label: "Metodo" },
+  { href: "/#storie", label: "Storie" },
 ];
 ---
 
@@ -16,12 +17,9 @@ const links = [
   data-header
 >
   <div class="mx-auto max-w-6xl px-5">
-    <div
-      class="mt-3 flex items-center justify-between rounded-full border border-white/10 bg-ink-950/80 px-4 py-2.5 backdrop-blur-md transition-all"
-      data-header-bar
-    >
-      <a href="/#top" class="flex items-center gap-2 font-display text-lg font-extrabold text-white">
-        <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-ink-950">B</span>
+    <div class="flex items-center justify-between py-3.5">
+      <a href="/#top" class="flex items-center gap-2.5 font-display text-lg font-semibold text-ink">
+        <BrandMark class="h-7 w-7" />
         {site.name}
       </a>
 
@@ -30,36 +28,31 @@ const links = [
           links.map((l) => (
             <a
               href={l.href}
-              class="text-sm font-medium text-ink-200 transition-colors hover:text-white"
+              class="text-sm font-medium text-fumo transition-colors hover:text-ink"
             >
               {l.label}
             </a>
           ))
         }
+        <Button href="/#contatti" size="md">Scrivici</Button>
       </nav>
-
-      <div class="hidden md:block">
-        <Button href="/#contatti" size="md">Richiedi preventivo</Button>
-      </div>
 
       <button
         type="button"
-        class="grid h-10 w-10 place-items-center rounded-lg text-white md:hidden"
+        class="grid h-10 w-10 place-items-center rounded-lg text-ink md:hidden"
         aria-label="Apri menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
         data-menu-toggle
       >
-        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
-          <path d="M4 7h16M4 12h16M4 17h16"></path>
-        </svg>
+        <Icon name="burger" class="h-6 w-6" />
       </button>
     </div>
 
     <!-- Menu mobile -->
     <nav
       id="mobile-menu"
-      class="mt-2 hidden rounded-2xl border border-white/10 bg-ink-950/95 p-4 backdrop-blur-md md:hidden"
+      class="mt-1 hidden rounded-2xl border border-line bg-surface p-4 shadow-lg md:hidden"
       aria-label="Menu mobile"
       data-mobile-menu
     >
@@ -67,7 +60,7 @@ const links = [
         links.map((l) => (
           <a
             href={l.href}
-            class="block rounded-lg px-3 py-2.5 text-base font-medium text-ink-100 hover:bg-white/5"
+            class="block rounded-lg px-3 py-2.5 text-base font-medium text-ink hover:bg-ground"
             data-mobile-link
           >
             {l.label}
@@ -76,19 +69,29 @@ const links = [
       }
       <a
         href="/#contatti"
-        class="mt-2 block rounded-full bg-brand-500 px-3 py-2.5 text-center font-semibold text-ink-950"
+        class="mt-2 block rounded-full bg-blu px-3 py-2.5 text-center font-semibold text-ground"
         data-mobile-link
       >
-        Richiedi preventivo
+        Scrivici
       </a>
     </nav>
   </div>
 </header>
 
+<style>
+  /* Sfondo sfumato dopo lo scroll (classe aggiunta dallo script) */
+  [data-header].is-scrolled {
+    background: color-mix(in srgb, var(--color-ground) 82%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 var(--color-line);
+  }
+</style>
+
 <script>
   const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
-  const header = document.querySelector<HTMLElement>("[data-header-bar]");
+  const header = document.querySelector<HTMLElement>("[data-header]");
 
   function setMenu(open: boolean) {
     if (!menu || !toggle) return;
@@ -105,12 +108,8 @@ const links = [
     .querySelectorAll("[data-mobile-link]")
     .forEach((l) => l.addEventListener("click", () => setMenu(false)));
 
-  // Header più compatto/ombreggiato dopo lo scroll.
   const onScroll = () => {
-    if (!header) return;
-    header.classList.toggle("shadow-2xl", window.scrollY > 12);
-    header.classList.toggle("ring-1", window.scrollY > 12);
-    header.classList.toggle("ring-white/10", window.scrollY > 12);
+    header?.classList.toggle("is-scrolled", window.scrollY > 24);
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });

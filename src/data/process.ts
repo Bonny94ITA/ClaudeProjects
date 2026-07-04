@@ -1,33 +1,30 @@
-/** Fasi del metodo di lavoro — usate da <Process />. */
+/** Metodo di lavoro — consumato da <Method />. */
 export type Step = {
-  step: string;
   title: string;
   description: string;
 };
 
 export const steps: Step[] = [
   {
-    step: "01",
-    title: "Ascolto",
+    title: "Un caffè",
     description:
-      "Una chiacchierata (anche su WhatsApp) per capire la tua attività, i tuoi clienti e cosa ti serve davvero.",
+      "Ci racconti il tuo lavoro: cosa fai, chi sono i tuoi clienti, cosa ti manca. Mezz'ora, anche al telefono.",
   },
   {
-    step: "02",
-    title: "Proposta",
+    title: "Costruiamo",
     description:
-      "Ti presento una bozza chiara con struttura, stile e preventivo trasparente. Nessuna sorpresa.",
+      "Prepariamo il sito e te lo mostriamo passo passo. Il prezzo lo decidiamo prima, insieme — e non si muove più.",
   },
   {
-    step: "03",
-    title: "Realizzazione",
+    title: "Restiamo",
     description:
-      "Costruisco il sito, inserisco testi e foto, configuro Google e i contatti. Tu approvi ogni passo.",
+      "Dopo la consegna non spariamo: aggiornamenti, assistenza e consigli quando servono. Come un fornitore di fiducia.",
   },
-  {
-    step: "04",
-    title: "Online & assistenza",
-    description:
-      "Pubblichiamo il sito e resto al tuo fianco per aggiornamenti, modifiche e crescita nel tempo.",
-  },
+];
+
+/** I patti chiari mostrati sotto ai passi. */
+export const patti = [
+  "Un solo referente, sempre lo stesso",
+  "Niente parole difficili",
+  "Se una cosa non ti serve, te lo diciamo",
 ];
