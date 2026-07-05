@@ -75,8 +75,11 @@
   }
 
   :focus-visible {
+    /* Anello doppio: l'inchiostro garantisce il contrasto ≥3:1 sul fondo
+       chiaro, l'ambra sul pannello notte e sul tema scuro (WCAG 1.4.11). */
     outline: 3px solid var(--color-ambra);
-    outline-offset: 3px;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--color-ink);
     border-radius: 4px;
   }
 }
@@ -139,6 +142,7 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
   /* Niente reveal animato: il contenuto è subito visibile, mai nascosto. */
