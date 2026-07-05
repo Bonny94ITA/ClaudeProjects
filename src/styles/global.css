@@ -1,86 +1,153 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
-   Design system — token centralizzati (Tailwind v4 @theme).
-   Cambia qui i colori/font del brand: si propagano a tutte le utility.
+   Design system — "La bottega, ma digitale".
+   Di giorno (tema chiaro): calce e blu da lavoro. Di sera (tema scuro,
+   automatico via prefers-color-scheme): la vetrina resta accesa d'ambra.
+   Cambia i token QUI: si propagano a tutte le utility Tailwind.
 ---------------------------------------------------------------------------- */
 @theme {
   /* Font (self-hosted via @fontsource per privacy/GDPR e performance) */
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
 
-  /* Base scura (navy/indaco) */
-  --color-ink-50: #f5f7fa;
-  --color-ink-100: #e7ecf3;
-  --color-ink-200: #c7d2e0;
-  --color-ink-300: #9bacc4;
-  --color-ink-400: #6a80a1;
-  --color-ink-500: #4a6086;
-  --color-ink-600: #384b6c;
-  --color-ink-700: #2b3a55;
-  --color-ink-800: #1c2840;
-  --color-ink-900: #131d33;
-  --color-ink-950: #0b1222;
+  /* Superfici e testo */
+  --color-ground: #f6f4f0;   /* bianco calce */
+  --color-surface: #fffefb;
+  --color-ink: #161c28;      /* blu inchiostro */
+  --color-fumo: #57616f;     /* testo secondario */
+  --color-line: rgba(22, 28, 40, 0.11);
 
-  /* Accento caldo (ambra) — calore "da bottega" */
-  --color-brand-50: #fff8eb;
-  --color-brand-100: #ffedc6;
-  --color-brand-200: #ffd888;
-  --color-brand-300: #ffbf4a;
-  --color-brand-400: #fba521;
-  --color-brand-500: #f59e0b;
-  --color-brand-600: #d97706;
-  --color-brand-700: #b45309;
-  --color-brand-800: #92400e;
-  --color-brand-900: #78350f;
+  /* Brand */
+  --color-blu: #2c5b84;      /* blu tuta da lavoro */
+  --color-blu-deep: #234b6e;
+  --color-ambra: #e8a33c;    /* ambra insegna */
+  --color-ambra-ink: #1c1710;
+
+  /* Pannello "notte" (CTA finale): resta scuro in entrambi i temi */
+  --color-notte: #101724;
+  --color-notte-text: #ede9e0;
+  --color-notte-muted: #9aa5b5;
+}
+
+/* Token che cambiano col tema ma non generano utility */
+:root {
+  --awning-blu: #2c5b84;     /* la tela della tenda resta blu profondo sempre */
+  --awning-light: #e6e0d2;
+  --scene-glow: 0;           /* la luce in vetrina: spenta di giorno */
+}
+
+/* Tema scuro automatico: la bottega di sera */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ground: #0f141d;
+    --color-surface: #171e2b;
+    --color-ink: #ede9e0;
+    --color-fumo: #9aa5b5;
+    --color-line: rgba(237, 233, 224, 0.13);
+    --color-blu: #7aa5cc;
+    --color-blu-deep: #9dbedd;
+    --color-notte: #0b0f16;
+    --awning-light: #d8d3c7;
+    --scene-glow: 0.5;       /* di sera la luce è accesa */
+  }
 }
 
 /* ----------------------------------------------------------------------------
    Base
 ---------------------------------------------------------------------------- */
-/* In @layer base così le utility (es. text-white) possono sovrascrivere il
-   colore di default dei titoli: senza il layer queste regole "non-layered"
-   vincevano sempre, rendendo invisibili i titoli sulle sezioni scure. */
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Compensa l'header sticky quando si naviga alle ancore */
+    /* Compensa l'header fisso quando si naviga alle ancore */
     scroll-padding-top: 5rem;
   }
 
   body {
     font-family: var(--font-sans);
-    @apply bg-white text-ink-800 antialiased;
+    @apply bg-ground text-ink antialiased;
   }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    @apply tracking-tight text-ink-950;
+    text-wrap: balance;
+    @apply tracking-tight;
   }
+
+  :focus-visible {
+    /* Anello doppio: l'inchiostro garantisce il contrasto ≥3:1 sul fondo
+       chiaro, l'ambra sul pannello notte e sul tema scuro (WCAG 1.4.11). */
+    outline: 3px solid var(--color-ambra);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--color-ink);
+    border-radius: 4px;
+  }
+}
+
+/* Targhetta di sezione: eyebrow con le righe della tenda */
+.eyebrow {
+  @apply inline-flex items-center gap-2.5 text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-fumo;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 12px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-blu) 0 5px,
+    var(--color-ambra) 5px 8px,
+    var(--color-blu) 8px 13px,
+    transparent 13px 22px
+  );
+  background-size: 13px 100%;
+  background-repeat: repeat-x;
+}
+
+/* ----------------------------------------------------------------------------
+   Animazioni
+---------------------------------------------------------------------------- */
+/* Reveal allo scroll (attivato da src/scripts/reveal.ts).
+   Ritarda con `style="--d:.15s"` per l'effetto a cascata. */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0s);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sequenza d'ingresso dell'hero */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.rise-2 { animation-delay: 0.12s; }
+.rise-3 { animation-delay: 0.24s; }
+.rise-4 { animation-delay: 0.36s; }
+.rise-5 { animation-delay: 0.5s; }
+
+/* Oscillazione del cartellino APERTO */
+@keyframes swing {
+  0%, 100% { transform: rotate(-2.6deg); }
+  50% { transform: rotate(2.6deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
   /* Niente reveal animato: il contenuto è subito visibile, mai nascosto. */
-  .reveal {
+  .reveal, .rise {
     opacity: 1 !important;
     transform: none !important;
   }
-}
-
-/* ----------------------------------------------------------------------------
-   Animazione "reveal" allo scroll (attivata da src/scripts/reveal.ts)
----------------------------------------------------------------------------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
 }

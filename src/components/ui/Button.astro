@@ -5,7 +5,7 @@
  */
 interface Props {
   href?: string;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "ambra" | "ghost";
   size?: "md" | "lg";
   type?: "button" | "submit";
   class?: string;
@@ -22,7 +22,7 @@ const {
 } = Astro.props;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60";
 
 const sizes = {
   md: "px-5 py-2.5 text-sm",
@@ -30,12 +30,9 @@ const sizes = {
 };
 
 const variants = {
-  primary:
-    "bg-brand-500 text-ink-950 shadow-lg shadow-brand-500/25 hover:bg-brand-400 hover:-translate-y-0.5",
-  secondary:
-    "bg-ink-900 text-white hover:bg-ink-800 hover:-translate-y-0.5",
-  ghost:
-    "bg-white/0 text-ink-800 ring-1 ring-ink-200 hover:bg-ink-50 hover:ring-ink-300",
+  primary: "bg-blu text-ground shadow-md shadow-blu/20 hover:bg-blu-deep hover:shadow-lg",
+  ambra: "bg-ambra text-ambra-ink hover:bg-[#f0b155] hover:shadow-[0_8px_30px_-6px_rgba(232,163,60,0.55)]",
+  ghost: "border border-line bg-transparent text-ink hover:border-fumo hover:bg-surface",
 };
 
 const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`;

@@ -4,43 +4,37 @@ export type Service = {
   description: string;
   /** Nome icona (vedi src/components/ui/Icon.astro). */
   icon: string;
+  /** A chi è rivolto, in una riga. */
+  tag: string;
 };
 
 export const services: Service[] = [
   {
     title: "Sito vetrina",
     description:
-      "Un sito moderno, veloce e mobile-first che presenta la tua attività, gli orari e dove trovarti. La tua immagine professionale, online.",
-    icon: "browser",
+      "Un sito veloce e curato che racconta cosa fai, dove sei e quando sei aperto. Si legge bene anche dal telefono, senza occhiali.",
+    icon: "storefront",
+    tag: "Per chi parte da zero",
   },
   {
-    title: "Menù digitale & ordini",
+    title: "Farsi trovare su Google",
     description:
-      "Menù sempre aggiornato via QR code, listino prodotti o un piccolo shop per ritiro e consegna. Niente PDF illeggibili al telefono.",
-    icon: "menu",
-  },
-  {
-    title: "Google & SEO locale",
-    description:
-      "Scheda Google Business ottimizzata e posizionamento locale: ti trovano quando cercano \"panetteria vicino a me\".",
+      "Scheda Google Business sistemata, mappe, recensioni e SEO locale: quando qualcuno cerca «idraulico vicino a me», esci tu.",
     icon: "pin",
+    tag: "Per chi è invisibile online",
   },
   {
-    title: "Prenotazioni online",
+    title: "Prenotazioni e ordini",
     description:
-      "Tavoli, appuntamenti o servizi prenotabili direttamente dal sito o da WhatsApp, senza telefonate continue.",
-    icon: "calendar",
+      "Tavoli, appuntamenti e ordini direttamente dal sito o da WhatsApp. Il telefono squilla di meno — e solo per le cose importanti.",
+    icon: "calendar-check",
+    tag: "Per chi vive al telefono",
   },
   {
-    title: "Social & immagine",
+    title: "Ci pensiamo noi",
     description:
-      "Logo, palette, foto e template coordinati per Instagram e Facebook: un'identità riconoscibile ovunque.",
-    icon: "spark",
-  },
-  {
-    title: "Assistenza & aggiornamenti",
-    description:
-      "Ci pensiamo noi: hosting, sicurezza, modifiche e piccoli aggiornamenti. Tu ti concentri sul tuo lavoro.",
-    icon: "shield",
+      "Hosting, sicurezza, gli orari da cambiare, la foto nuova da caricare: scrivici e ce ne occupiamo. Tu pensa al tuo lavoro.",
+    icon: "wrench",
+    tag: "Per chi non ha tempo",
   },
 ];

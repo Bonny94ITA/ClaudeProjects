@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#0b1222"/>
-  <text x="16" y="22" font-family="Verdana, sans-serif" font-size="18" font-weight="700" fill="#f59e0b" text-anchor="middle">B</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
+  <rect width="26" height="26" rx="7" fill="#2c5b84"/>
+  <rect x="6" y="7" width="3" height="7" rx="1.5" fill="#f6f4f0"/>
+  <rect x="11.5" y="7" width="3" height="7" rx="1.5" fill="#e8a33c"/>
+  <rect x="17" y="7" width="3" height="7" rx="1.5" fill="#f6f4f0"/>
+  <rect x="6" y="16" width="14" height="3" rx="1.5" fill="#f6f4f0" opacity="0.55"/>
 </svg>

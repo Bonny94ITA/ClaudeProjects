@@ -2,91 +2,232 @@
 import Button from "./ui/Button.astro";
 import Icon from "./ui/Icon.astro";
 import { whatsappUrl } from "../config/site";
+
+const trust = [
+  "Risposta in giornata",
+  "Preventivo fisso, per iscritto",
+  "Nessun vincolo nascosto",
+];
 ---
 
-<section id="top" class="relative overflow-hidden bg-ink-950 text-white">
-  <!-- Sfondo decorativo -->
-  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <div class="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl"></div>
-    <div class="absolute top-20 right-0 h-80 w-80 rounded-full bg-ink-500/30 blur-3xl"></div>
-    <div
-      class="absolute inset-0 opacity-[0.07]"
-      style="background-image:radial-gradient(circle at 1px 1px, white 1px, transparent 0);background-size:32px 32px;"
-    >
-    </div>
-  </div>
-
-  <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-36 sm:pt-40 lg:grid-cols-2 lg:pb-28">
+<section id="top" class="overflow-hidden">
+  <div
+    class="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-32 sm:pt-40 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20 lg:pb-24"
+  >
     <div>
-      <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm text-ink-100">
-        <span class="h-2 w-2 rounded-full bg-brand-400"></span>
-        Per panetterie, bar, ristoranti e negozi di quartiere
-      </p>
+      <p class="eyebrow rise">Siti web per piccole attività</p>
 
-      <h1 class="text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
-        Porta la tua attività
-        <span class="bg-gradient-to-r from-brand-300 to-brand-500 bg-clip-text text-transparent">
-          online
-        </span>, senza complicazioni.
+      <h1 class="rise rise-2 mt-4 text-4xl font-semibold leading-[1.12] tracking-[-0.022em] sm:text-5xl lg:text-[3.6rem]">
+        Sei bravo nel tuo mestiere.
+        <span class="text-blu">Si deve vedere anche online.</span>
       </h1>
 
-      <p class="mt-6 max-w-xl text-lg text-ink-200">
-        Siti web moderni e veloci, menù digitali, prenotazioni e visibilità su
-        Google. Tu pensi ai tuoi clienti, al resto pensiamo noi.
+      <p class="rise rise-3 mt-6 max-w-xl text-lg text-fumo">
+        Facciamo siti semplici, veloci e curati per artigiani, negozi e
+        professionisti. Parliamo come mangiamo — e il preventivo è quello vero.
       </p>
 
-      <div class="mt-9 flex flex-wrap gap-3">
-        <Button href="/#contatti" size="lg">
-          Richiedi un preventivo
-          <Icon name="arrow" class="h-4 w-4" />
+      <div class="rise rise-4 mt-9 flex flex-wrap gap-3">
+        <Button href={whatsappUrl} size="lg" target="_blank" rel="noopener noreferrer">
+          <Icon name="whatsapp" class="h-4.5 w-4.5" />
+          Scrivici su WhatsApp
         </Button>
-        <Button href="/#esempi" size="lg" variant="ghost" class="!text-white !ring-white/20 hover:!bg-white/10">
-          Vedi gli esempi
-        </Button>
+        <Button href="/#servizi" size="lg" variant="ghost">Guarda cosa facciamo</Button>
       </div>
 
-      <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-ink-300">
-        <span class="inline-flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-brand-400" /> Nessun costo nascosto</span>
-        <span class="inline-flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-brand-400" /> Pronto in 1–2 settimane</span>
-        <span class="inline-flex items-center gap-2"><Icon name="check" class="h-4 w-4 text-brand-400" /> Assistenza inclusa</span>
-      </div>
+      <ul class="rise rise-5 mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-fumo">
+        {
+          trust.map((t) => (
+            <li class="inline-flex items-center gap-2">
+              <Icon name="check" class="h-3.5 w-3.5 text-ambra" />
+              {t}
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <!-- Mockup browser stilizzato -->
-    <div class="reveal relative mx-auto w-full max-w-md lg:max-w-none">
-      <div class="rotate-1 rounded-2xl border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur">
-        <div class="flex items-center gap-1.5 px-2 pb-3 pt-1">
-          <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
-          <span class="h-3 w-3 rounded-full bg-amber-400/80"></span>
-          <span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
-          <span class="ml-3 truncate rounded bg-white/10 px-3 py-1 text-xs text-ink-300">fornoaurora.it</span>
+    <!-- La vetrina digitale: elemento firma del sito.
+         Passaci sopra col mouse: si accende la luce (di sera è già accesa). -->
+    <div
+      class="vetrina rise rise-3 relative mx-auto w-full max-w-[460px]"
+      role="img"
+      aria-label="Esempio di sito web per una panetteria, presentato come una vetrina di negozio con tenda a righe e cartellino Aperto"
+    >
+      <svg class="awning" viewBox="0 0 320 48" aria-hidden="true">
+        <g>
+          <rect x="0" width="40" height="28" fill="var(--awning-blu)"></rect>
+          <rect x="40" width="40" height="28" fill="var(--awning-light)"></rect>
+          <rect x="80" width="40" height="28" fill="var(--awning-blu)"></rect>
+          <rect x="120" width="40" height="28" fill="var(--awning-light)"></rect>
+          <rect x="160" width="40" height="28" fill="var(--awning-blu)"></rect>
+          <rect x="200" width="40" height="28" fill="var(--awning-light)"></rect>
+          <rect x="240" width="40" height="28" fill="var(--awning-blu)"></rect>
+          <rect x="280" width="40" height="28" fill="var(--awning-light)"></rect>
+          <circle cx="20" cy="28" r="20" fill="var(--awning-blu)"></circle>
+          <circle cx="60" cy="28" r="20" fill="var(--awning-light)"></circle>
+          <circle cx="100" cy="28" r="20" fill="var(--awning-blu)"></circle>
+          <circle cx="140" cy="28" r="20" fill="var(--awning-light)"></circle>
+          <circle cx="180" cy="28" r="20" fill="var(--awning-blu)"></circle>
+          <circle cx="220" cy="28" r="20" fill="var(--awning-light)"></circle>
+          <circle cx="260" cy="28" r="20" fill="var(--awning-blu)"></circle>
+          <circle cx="300" cy="28" r="20" fill="var(--awning-light)"></circle>
+        </g>
+      </svg>
+
+      <div class="sign" aria-hidden="true">
+        <span class="sign-card">APERTO</span>
+      </div>
+
+      <div class="browser" aria-hidden="true">
+        <div class="flex items-center gap-3 border-b border-line px-4 py-2.5">
+          <span class="flex gap-1.5">
+            <i class="h-2.5 w-2.5 rounded-full bg-line"></i>
+            <i class="h-2.5 w-2.5 rounded-full bg-line"></i>
+            <i class="h-2.5 w-2.5 rounded-full bg-line"></i>
+          </span>
+          <span class="flex-1 rounded-full bg-ground px-3.5 py-1 text-xs text-fumo">
+            panetteriacolombo.it
+          </span>
         </div>
-        <div class="overflow-hidden rounded-xl bg-gradient-to-br from-amber-50 to-orange-100 p-5 text-ink-900">
-          <div class="flex items-center justify-between">
-            <span class="text-2xl">🥖</span>
-            <span class="rounded-full bg-ink-950 px-3 py-1 text-xs font-semibold text-white">Ordina</span>
-          </div>
-          <p class="mt-4 font-display text-2xl font-extrabold">Forno Aurora</p>
-          <p class="text-sm text-ink-600">Pane, focacce e dolci freschi ogni mattina.</p>
-          <div class="mt-4 grid grid-cols-3 gap-2">
-            <div class="rounded-lg bg-white/70 p-2 text-center text-xs font-medium">Menù</div>
-            <div class="rounded-lg bg-white/70 p-2 text-center text-xs font-medium">Orari</div>
-            <div class="rounded-lg bg-white/70 p-2 text-center text-xs font-medium">Mappa</div>
+        <div class="scene relative p-6">
+          <p class="font-display text-xl font-semibold">Panetteria Colombo</p>
+          <p class="mt-0.5 text-sm text-fumo">Pane fresco ogni mattina, a Monza dal 1962.</p>
+
+          <!-- Il banco del pane -->
+          <svg class="mt-4 block w-full rounded-xl" viewBox="0 0 400 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="bak-bg" x1="0" y1="0" x2="0.7" y2="1">
+                <stop offset="0" stop-color="#f7e6c4"></stop>
+                <stop offset="1" stop-color="#e9c488"></stop>
+              </linearGradient>
+              <linearGradient id="bak-crust" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e8ab5e"></stop>
+                <stop offset="1" stop-color="#b1762f"></stop>
+              </linearGradient>
+              <linearGradient id="bak-crust2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#dfa050"></stop>
+                <stop offset="1" stop-color="#a86c29"></stop>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="130" fill="url(#bak-bg)"></rect>
+            <circle cx="330" cy="8" r="60" fill="#fdf3dd" opacity="0.55"></circle>
+            <rect y="98" width="400" height="32" fill="#a97e46"></rect>
+            <rect y="98" width="400" height="5" fill="#c69a5e"></rect>
+            <g transform="rotate(-6 235 84)">
+              <ellipse cx="235" cy="86" rx="82" ry="26" fill="url(#bak-crust)"></ellipse>
+              <ellipse cx="225" cy="76" rx="60" ry="12" fill="#f0c07a" opacity="0.55"></ellipse>
+              <path d="M195 70 q6 10 2 22" stroke="#8e5a22" stroke-width="3" fill="none" stroke-linecap="round"></path>
+              <path d="M230 66 q6 11 2 24" stroke="#8e5a22" stroke-width="3" fill="none" stroke-linecap="round"></path>
+              <path d="M265 68 q6 10 2 21" stroke="#8e5a22" stroke-width="3" fill="none" stroke-linecap="round"></path>
+            </g>
+            <ellipse cx="88" cy="96" rx="47" ry="15" fill="#8a5c25" opacity="0.35"></ellipse>
+            <ellipse cx="88" cy="76" rx="46" ry="33" fill="url(#bak-crust2)"></ellipse>
+            <ellipse cx="76" cy="62" rx="26" ry="12" fill="#efbe76" opacity="0.6"></ellipse>
+            <path d="M60 70 q28 -16 56 0" stroke="#7d4f1c" stroke-width="3" fill="none" stroke-linecap="round"></path>
+            <path d="M66 84 q22 -12 44 0" stroke="#7d4f1c" stroke-width="3" fill="none" stroke-linecap="round"></path>
+            <ellipse cx="348" cy="99" rx="25" ry="6" fill="#8a5c25" opacity="0.3"></ellipse>
+            <ellipse cx="348" cy="88" rx="24" ry="16" fill="url(#bak-crust)"></ellipse>
+            <ellipse cx="342" cy="80" rx="12" ry="6" fill="#f0c07a" opacity="0.6"></ellipse>
+            <path d="M348 74 v16" stroke="#8e5a22" stroke-width="2.5" stroke-linecap="round"></path>
+            <circle cx="160" cy="112" r="2" fill="#fdf3dd" opacity="0.8"></circle>
+            <circle cx="300" cy="116" r="1.6" fill="#fdf3dd" opacity="0.7"></circle>
+            <circle cx="55" cy="115" r="1.8" fill="#fdf3dd" opacity="0.7"></circle>
+          </svg>
+
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ground px-3.5 py-1.5 text-xs font-semibold">
+              <i class="h-1.5 w-1.5 rounded-full bg-[#4c9d64]"></i>
+              Aperto ora · 7:00–19:00
+            </span>
+            <span class="rounded-full bg-blu px-4 py-1.5 text-sm font-semibold text-ground">
+              Ordina il pane
+            </span>
           </div>
         </div>
       </div>
-
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="absolute -bottom-5 -left-4 flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-ink-900 shadow-xl ring-1 ring-ink-100 transition-transform hover:-translate-y-0.5"
-      >
-        <span class="grid h-9 w-9 place-items-center rounded-full bg-emerald-500 text-white">
-          <Icon name="whatsapp" class="h-5 w-5" />
-        </span>
-        Scrivici su WhatsApp
-      </a>
     </div>
   </div>
 </section>
+
+<style>
+  .vetrina {
+    /* Spazio per la tenda (alta ~15% della larghezza): deve coprire solo
+       il bordo superiore del browser, non la barra degli indirizzi. */
+    padding-top: clamp(34px, 11.5%, 52px);
+  }
+  .awning {
+    position: absolute;
+    top: 0;
+    left: -4%;
+    width: 108%;
+    z-index: 3;
+    filter: drop-shadow(0 12px 16px rgba(22, 28, 40, 0.24));
+    pointer-events: none;
+  }
+  .browser {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 18px;
+    box-shadow:
+      0 2px 6px rgba(22, 28, 40, 0.06),
+      0 24px 60px -18px rgba(22, 28, 40, 0.22);
+    overflow: hidden;
+    transition: box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* La luce in vetrina: si accende al passaggio (di sera è già accesa) */
+  .scene::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(120% 90% at 50% 0%, rgba(232, 163, 60, 0.34), transparent 62%);
+    opacity: var(--scene-glow);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .vetrina:hover .scene::after,
+  .vetrina:focus-within .scene::after {
+    opacity: 0.55;
+  }
+  .vetrina:hover .browser {
+    box-shadow:
+      0 2px 6px rgba(22, 28, 40, 0.06),
+      0 24px 60px -18px rgba(22, 28, 40, 0.22),
+      0 0 70px -12px rgba(232, 163, 60, 0.45);
+  }
+
+  /* Cartellino APERTO appeso alla tenda */
+  .sign {
+    position: absolute;
+    top: clamp(60px, 17%, 80px);
+    right: 7%;
+    z-index: 4;
+    transform-origin: 50% -14px;
+    animation: swing 5.5s ease-in-out infinite;
+  }
+  .vetrina:hover .sign {
+    animation-duration: 2.4s;
+  }
+  .sign::before {
+    /* il filo */
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 1.5px;
+    height: 16px;
+    background: var(--color-fumo);
+  }
+  .sign-card {
+    display: inline-block;
+    background: var(--color-ambra);
+    color: var(--color-ambra-ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    padding: 0.4rem 0.8rem;
+    border-radius: 7px;
+    box-shadow: 0 6px 18px -4px rgba(232, 163, 60, 0.6);
+  }
+</style>
